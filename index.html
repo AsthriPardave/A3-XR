@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAC0623 — A3: WebXR Navigation</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script>
+    document.write('<link rel="stylesheet" href="./style.css?t=' + Date.now() + '">');
+  </script>
+</head>
+<body>
+  <div id="hud">
+    <label>Participant <input id="participantId" value="P01" size="5" /></label>
+    <label>Technique
+      <select id="mappingSelect">
+        <option value="1">1 — WIM</option>
+        <option value="2">2 — Joystick</option>
+      </select>
+    </label>
+    <button id="startBtn">Start trial</button>
+    <span id="trialCount">Not started</span>
+    <button id="confirmBtn">Confirm target</button>
+    <button id="downloadBtn">Download CSV</button>
+    <span id="status">Ready</span>
+  </div>
+  <div id="viewport-metrics" aria-live="polite">
+    <span id="metrics">Distance error: — | Time: waiting</span>
+  </div>
+  <div id="help">
+    <strong>Computer Science faculty navigation</strong><br />
+    <b>WIM:</b> map on the left controller. Point the right controller at the map,
+    hold the trigger, drag the red person toward the green circle, then release.<br />
+    <b>Joystick:</b> use the left thumbstick to move.<br />
+    <b>Desktop:</b> WASD/arrows to move, drag mouse to look, Enter to confirm.
+  </div>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
+
