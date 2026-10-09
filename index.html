@@ -3,37 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MAC0623 — A3: WebXR Navigation</title>
-  <link rel="stylesheet" href="./style.css" />
+  <title>MAC0623 — A3 Navigation Testbed (WIM vs Joystick)</title>
+  <!-- Cache-bust: python -m http.server does not send no-cache headers, so
+       the browser would otherwise keep serving stale CSS/JS (HTTP 304). -->
   <script>
     document.write('<link rel="stylesheet" href="./style.css?t=' + Date.now() + '">');
   </script>
 </head>
 <body>
+
   <div id="hud">
-    <label>Participant <input id="participantId" value="P01" size="5" /></label>
+    <label>Participant <input id="participantId" value="P01" size="4" /></label>
     <label>Technique
       <select id="mappingSelect">
-        <option value="1">1 — WIM</option>
-        <option value="2">2 — Joystick</option>
+        <option value="wim">1 — WIM (World-in-Miniature)</option>
+        <option value="joystick">2 — Joystick</option>
       </select>
     </label>
-    <button id="startBtn">Start trial</button>
-    <span id="trialCount">Not started</span>
-    <button id="confirmBtn">Confirm target</button>
+    <span id="trialCount">Trial 1</span>
+    <button id="confirmBtn">Confirm (Enter)</button>
     <button id="downloadBtn">Download CSV</button>
-    <span id="status">Ready</span>
+    <span id="status">—</span>
   </div>
-  <div id="viewport-metrics" aria-live="polite">
-    <span id="metrics">Distance error: — | Time: waiting</span>
-  </div>
+
+  <div id="liveErrors" aria-live="polite">dist —</div>
+
   <div id="help">
-    <strong>Computer Science faculty navigation</strong><br />
-    <b>WIM:</b> map on the left controller. Point the right controller at the map,
-    hold the trigger, drag the red person toward the green circle, then release.<br />
-    <b>Joystick:</b> use the left thumbstick to move.<br />
-    <b>Desktop:</b> WASD/arrows to move, drag mouse to look, Enter to confirm.
+    Walk to the green circle and confirm (grip button in VR, Enter on desktop).
+    Confirm only works inside the circle.
+    <b>WIM</b>: miniature in your left hand, red person = you. Hold the right
+    trigger near the red person, drag it onto the green circle and release:
+    you jump there.
+    <b>Joystick</b>: left thumbstick moves you (relative to where you look).
+    Left controller X = exit VR. Desktop debug: drag = look, WASD = move.
   </div>
+
   <script type="importmap">
   {
     "imports": {
@@ -42,7 +46,8 @@
     }
   }
   </script>
-  <script type="module" src="./main.js"></script>
+  <script type="module">
+    import("./main.js?t=" + Date.now());
+  </script>
 </body>
 </html>
-
